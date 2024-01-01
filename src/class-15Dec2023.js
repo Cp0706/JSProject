@@ -1,6 +1,6 @@
 let data
 const personUrl = 'https://api.themoviedb.org/3/person/'
-const apiKey = 'e284050e0ccfefbcc46609f394f1ca3a';
+const apiKey = '42ee719896b25f8821890615eeabf17f';
 const movieUrl = 'https://api.themoviedb.org/3/movie/';
 const imageUrl = 'https://image.tmdb.org/t/p/original';
 let movieIds;
@@ -11,84 +11,16 @@ console.log(queryParamsMap.get('id'), queryParamsMap.get('posterPath'));
 import('./moviesPlay.js')
 	.then(res => {
 		console.log('data imported into data constant');
-		data = res;
+		data = res.movies;
+    data = data.concat(res.hindiMovies);
     if (queryString) {
       showMovie(queryParamsMap.get('id'), queryParamsMap.get('posterPath'));
     }
     
-  	run();
 	});
-  
-
-function run() {
-	const filteredMovies = data.movies.filter(movie => {
-    return movie.runtimeMinutes > 150;
-  })
-  const totalRuntime = filteredMovies.reduce((acc, movie) => {
-    return acc + movie.runtimeMinutes;
-  }, 0)
-  console.log('Total Runtime: ' + totalRuntime + ', avg runtime: ' + Math.ceil(totalRuntime / filteredMovies.length));
-
-  //Reformat the filtered output to just get movie ids
-  movieIds = filteredMovies.map(movie => movie.tmdbId);
-  console.log(movieIds);
-
-  //getMovieInformation(movieIds);
-}
-
-function getMovieInformation() {
-  const fetchArray = movieIds.map(movieId => {
-    return (
-      fetch(`${movieUrl}${movieId}?api_key=${apiKey}`)
-        .then(response => response.json())
-    )
-  });
-  Promise.all(fetchArray)
-    .then(fetchResponses => {
-      const moviesInfo = fetchResponses.map(resp => {
-        return {
-          id: resp.id, overview: resp.overview,
-          posterPath: resp.poster_path, releaseDate: resp.release_date,
-          runTime: resp.runtime, tagLine: resp.tagline, 
-          title: resp.title
-        }
-      })
-      console.log(moviesInfo);
-      document.getElementById('content').innerHTML = getMovieHtml(moviesInfo);
-    })
-}
-
-function getMovieHtml(moviesInfo) {
-  let movieHtml = '<div class="ui link cards">'
-
-  const movieCards = moviesInfo.reduce((html, movie) => {
-    return html + `
-      <div class="card">
-        <div class="image">
-          <a href='./movie.html?id=${movie.id}&posterPath=${movie.posterPath}'>
-          <img src='${imageUrl}${movie.posterPath}' />
-          </a>
-        </div>
-        <div class="content">
-          <div class="header">${movie.title}</div>
-          <div class="meta">
-            <a>${movie.releaseDate}</a>
-          </div>
-          <div class="description">
-            ${movie.tagLine}
-          </div>
-        </div>
-      </div>
-    `
-  }, '');
-
-  movieHtml+= `${movieCards}</div>`;
-  console.log(movieHtml);
-  return movieHtml;
-}
 
 function showMovie(id, posterPath) {
-  const movieInfo = data.movies.find(movie => {
+  let movieInfo = data.find(movie => {
     return movie.tmdbId === id;
   })
   getCastHtml(movieInfo.cast)

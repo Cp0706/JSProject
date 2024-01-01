@@ -1,24 +1,148 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <title>Learning is Fun</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon-img.png">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
-    <script src="index.js"></script>
-  </head>
-  <body>
-    <div class="ui container">
-      <div id="content">
-        <label for="movies">Select a movie:</label>
-        <select name="movies" id="movies" 
-          class="ui compact selection dropdown"
-          onchange="movieSelected()"
-          >
-          <option value="111">Scarface</option>
-          <option value="95">Armageddon</option>
-        </select>
-      </div>
+
+<head>
+<title>Learning is Fun</title>
+<link rel="icon" type="image/x-icon" href="/images/favicon-img.png">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
+
+<script src="./index.js"></script>
+<style>
+    .heading-box {
+        color: rgb(255, 255, 255);
+        padding: 90px;
+        text-align: center;
+    }
+
+    .search-container {
+        margin: 5px;
+        padding-left: 30%;
+    }
+    
+    .search-box {
+        width: 500px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 10px;
+        background-color: transparent;
+        color: white;
+    }
+    
+    .suggestions-container {
+        margin-top: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .suggestion {
+        padding: 5px;
+        cursor: pointer;
+        color: white;
+    }
+    
+
+    .box-container {
+        display: block;
+        border: 2px solid #ffffff18;
+        padding: 15px;
+        width: 20%;
+        color: white;
+    }
+
+    input[type="radio"] {
+        margin-right: 5px;
+    }
+
+    .ui.container {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    #content {
+        width: 80%;
+        margin-left: 60px;
+    }
+
+    .scrollable-box {
+        width: 500px;
+        height: 200px;
+        overflow: auto;
+        padding: 10px;
+    }
+
+</style>
+</head>
+
+<body>
+<video autoplay muted loop id="backgroundVideo">
+    <source src="./src/video.mp4" type="video/mp4">
+</video>
+<div class="heading-box">
+    <p  style="font-size: 44px;">Welcome to Movie Site</p> 
+</div>
+<br/>
+<div class="search-container">            
+    <input id="searchInput" class="search-box" type="text" placeholder="Search movie or cast names...">
+    <button class="ui secondary button" style="float:center" onclick="showSearchedMovie()">Search Movie</button>
+    <div class="scrollable-box">
+    <div id="suggestionsContainer" class="suggestions-container"></div>
     </div>
-  </body>
+    </div>
+<div class="box-container" id="boxContainer">
+    <div class="ui form">
+        <div class="inline fields">
+            <label style="color: #ffffff;">Movies Type:-</label>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="frequency" value="All" checked>
+                    <label style="color: #ffffff">All</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="frequency" value="International">
+                    <label style="color: #ffffff">International</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="frequency" value="Hindi">
+                    <label style="color: #ffffff;">Hindi</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <p><b>Select Genres:-</b></p>
+    <div id="Genres"></div>
+    <br/>
+    <p><b>Condition Satisfy:-</b></p>
+    <input type="radio" id="orRadio" name="radio" value="OR"  checked />
+    <label for="orRadio">Any one</label>
+    <input type="radio" id="andRadio" name="radio" value="AND" />
+    <label for="andRadio">Both</label>
+    <br/>
+    <br/>
+    <hr/>
+        <label for="decadeDropdown"><b>Select Decade:</b></label>
+        <br/>   
+            <select id="decadeDropdown">
+
+            </select>
+    <br /> <br />
+    <button class="ui secondary button" onclick="showMovie()">Apply</button>
+</div>
+<br/>
+    
+<div class="ui container">
+    <div id="content">
+
+    </div>
+</div>
+    </div>
+</div>
+
+</body>
+
 </html>

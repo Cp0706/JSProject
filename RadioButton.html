@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Learning is Fun</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon-img.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
+    <script src="./src/RadioButton.js"></script>
+  </head>
+  <body>
+    <div class="ui form">
+      <div class="inline fields">
+        <label>Movies Type:-</label>
+        <div class="field">
+          <div class="ui radio checkbox" >
+            <input type="radio"  name="frequency"  value="International" onchange="setMovieType()">
+            <label>International</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio"  name="frequency"  value="Hindi" onchange="setMovieType()">
+            <label>Hindi</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <input type="radio"  name="frequency" value="All" onchange="setMovieType()">
+            <label>All</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui container">
+      <hr/>
+      <div id="content">
+        
+      </div>
+    </div>
+  </body>
+</html>

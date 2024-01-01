@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Learning is Fun</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon-img.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
+    <style>
+      .search-container {
+        margin: 50px;
+      }
+      .search-box {
+        width: 300px;
+        padding: 10px;
+        font-size: 16px;
+      }
+      .suggestions-container {
+        margin-top: 10px;
+        overflow-y: auto;
+      }
+      .suggestion {
+        padding: 5px;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 5px;
+      }
+      .scrollable-box {
+        width: 300px;
+        height: 200px;
+        overflow: auto; /* This property enables scrolling when content overflows the box */
+        border: 1px solid #ccc; /* Optional border for better visualization */
+        padding: 10px; /* Optional padding for better spacing */
+      }
+    </style>
+    <script src="./src/Task4.js"></script>
+  </head>
+  <body>
+    <label for="searchInput">Enter movie or cast name:</label>
+    <div class="search-container">
+      <input id="searchInput" class="search-box" type="text" placeholder="Search cast names...">
+      <div class="scrollable-box">
+      <div id="suggestionsContainer" class="suggestions-container"></div>
+      </div>
+    </div>
+    <button class="ui secondary button" onclick="searchMovies()">Search Button</button>
+    <!--<input type="text" id="searchInput" oninput="searchMovies()"> -->
+      <div class="ui container">
+        <hr/>
+        <div id="content">
+          
+        </div>
+      </div>
+  </body>
+</html>
