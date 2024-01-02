@@ -195,6 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
    }
 });
 
+
 function searchMovies() {
    const searchValue = document.getElementById('searchInput').value.toLowerCase();
    const filteredEnglishMovies = data.movies.filter(movie => {
