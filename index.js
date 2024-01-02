@@ -9,7 +9,7 @@ const imageUrl = 'https://image.tmdb.org/t/p/original';
 let moviesIdbyLanguage;
 let moviesIdbyGenres;
 let moviesIdbySearch;
-let filteredMoviesByDecade;
+let filteredMoviesIdByDecade;
 
 import('./src/moviesPlay.js')
    .then(res => {
@@ -30,8 +30,8 @@ function startfunction() {
    populateDecadeDropdown(decades);
    document.getElementById('decadeDropdown').addEventListener('change', function () {
       const selectedDecade = this.value;
-      filteredMoviesByDecade = filterMoviesByDecade(movies, selectedDecade);
-      filteredMoviesByDecade = filteredMoviesByDecade.map(movie => movie.tmdbId);
+      const filteredMoviesByDecade = filterMoviesByDecade(movies, selectedDecade);
+      filteredMoviesIdByDecade = filteredMoviesByDecade.map(movie => movie.tmdbId);
    });
 }
 
@@ -224,9 +224,11 @@ function showMovie() {
       movieIds = moviesIdbyLanguage.filter(function (element) {
          return moviesIdbyGenres.includes(element);
       });
+   } else if(selectedGenres.length != 0 && moviesIdbyGenres.length === 0) {
+      movieIds = [];
    }
-   if (filteredMoviesByDecade) {
-      movieIds = movieIds.filter(function (element) { return filteredMoviesByDecade.includes(element) });
+   if (filteredMoviesIdByDecade) {
+      movieIds = movieIds.filter(function (element) { return filteredMoviesIdByDecade.includes(element) });
    }
    getMovieInformation();
 }
