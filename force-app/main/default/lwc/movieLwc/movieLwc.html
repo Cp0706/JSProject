@@ -1,3 +1,40 @@
+<!-- movieAppComponent.html -->
 <template>
-    
+   <lightning-card title="Movie List" icon-name="utility:filmstrip">
+      <div class="slds-m-around_medium">
+         <!-- <lightning-input type="text" label="Enter some text" onfocus={handleInputFocus} onblur={handleInputBlur}></lightning-input> -->
+         <lightning-record-picker
+            label="Search Movie"
+            placeholder="Search Movie..."
+            object-api-name="Movie__c"
+            onchange={searchMovie}
+         ></lightning-record-picker>
+           <template if:true={showAllMovies}>
+               <div class="slds-grid slds-wrap">
+                   <template for:each={moviesData} for:item="movie">
+                       <div key={movie.Id} class="slds-size_1-of-4">
+                               <lightning-carousel-image
+                                   src={movie.Poster_Path__c}
+                                   header={movie.Name}
+                                   description={movie.Release_Date__c}
+                                   alternative-text="Movie Poster"
+                               ></lightning-carousel-image>                                                 
+                       </div>
+                   </template>
+               </div>
+           </template>
+           <template if:true={showSearchedMovie}>
+            <div class="slds-grid slds-wrap">
+                    <div class="slds-size_1-of-4">
+                            <lightning-carousel-image
+                                src={seachedMovieData.Poster_Path__c}
+                                header={seachedMovieData.Name}
+                                description={seachedMovieData.Release_Date__c}
+                                alternative-text="Movie Poster"
+                            ></lightning-carousel-image>                                                 
+                    </div>
+            </div>
+        </template>
+       </div>
+   </lightning-card>
 </template>
