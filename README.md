@@ -1,5 +1,5 @@
 # Movie Site
-hello
+
 ## Overview
 The Movie App is a user-friendly web application designed to enhance the movie browsing experience. Users can effortlessly discover tailored movie recommendations by leveraging a variety of filters, including language, decade, and genre.
 
